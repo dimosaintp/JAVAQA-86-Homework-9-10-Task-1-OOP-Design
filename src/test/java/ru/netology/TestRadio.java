@@ -8,6 +8,27 @@ public class TestRadio {
     // Тестируем станции.
 
     @Test
+    public void setNullQuantityStation() {
+        Radio radio = new Radio();
+        radio.setCurrentStation (5);
+        Assertions.assertEquals(9, radio.getMaxStationStation());
+    }
+
+    @Test
+    public void setCurrentQuantityStation() {
+        Radio radio = new Radio(300);
+        radio.setCurrentStation (5);
+        Assertions.assertEquals(299, radio.getMaxStationStation());
+    }
+    @Test
+    public void lessThanAcceptableStation2() {
+        Radio radio = new Radio(300);
+        radio.setCurrentStation(-1);
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
     public void lessThanAcceptableStation() {
         Radio radio = new Radio();
         radio.setCurrentStation(-1);
@@ -208,7 +229,7 @@ public class TestRadio {
         Radio radio = new Radio();
         radio.setCurrentVolume(100);
         radio.nextVolume();
-        int expected = 0;
+        int expected = 100;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
@@ -220,7 +241,7 @@ public class TestRadio {
         Radio radio = new Radio();
         radio.setCurrentVolume(0);
         radio.prevVolume();
-        int expected = 100;
+        int expected = 0;
         int actual = radio.getCurrentVolume();
         Assertions.assertEquals(expected, actual);
     }
